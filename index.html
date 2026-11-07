@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="description" content="Personal portfolio of Rajisha R — Data Science and Mathematics student.">
+  <title>Rajisha R — Portfolio</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --bg: #0b0d10;
+      --surface: #11151a;
+      --surface-2: #171c22;
+      --text: #f1f3f2;
+      --muted: #9aa39f;
+      --line: rgba(235, 242, 237, .11);
+      --accent: #b7e4c7;
+      --accent-2: #d7f3df;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: "DM Sans", sans-serif;
+      --display: "Manrope", sans-serif;
+      --mono: "DM Mono", monospace;
+      --max: 1160px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 78% 8%, rgba(87, 135, 105, .12), transparent 34rem),
+        radial-gradient(ellipse at 4% 40%, rgba(75, 96, 113, .08), transparent 30rem),
+        var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 48px)); margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      color: var(--accent); font: 11px var(--mono); letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: var(--accent); }
+    .section { padding: 112px 0; border-top: 1px solid var(--line); }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 48px; }
+    h2 {
+      margin: 14px 0 0; font: 600 clamp(2.2rem, 5vw, 4rem)/1.08 var(--display);
+      letter-spacing: -.065em;
+    }
+    .section-intro { max-width: 390px; color: var(--muted); font-size: 14px; margin: 0 0 4px; }
+
+    /* Navigation */
+    .nav-shell {
+      position: fixed; z-index: 20; inset: 0 0 auto;
+      border-bottom: 1px solid transparent; transition: .3s ease;
+    }
+    .nav-shell.scrolled { background: rgba(11, 13, 16, .82); backdrop-filter: blur(18px); border-color: var(--line); }
+    nav { height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { font: 800 18px var(--display); letter-spacing: -.06em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 30px; }
+    .nav-links a { color: #aeb7b2; font-size: 12px; transition: color .2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-2); }
+    .nav-cta {
+      padding: 10px 16px; border: 1px solid rgba(183,228,199,.5);
+      border-radius: 4px; color: var(--accent-2) !important;
+    }
+    .menu-toggle { display: none; border: 1px solid var(--line); background: transparent; color: var(--text); padding: 8px 11px; border-radius: 4px; }
+
+    /* Hero */
+    .hero { min-height: 790px; display: flex; align-items: center; padding: 150px 0 105px; position: relative; overflow: hidden; }
+    .hero::after {
+      content: "R"; position: absolute; right: max(3vw, calc((100vw - var(--max))/2));
+      top: 105px; font: 800 clamp(280px, 43vw, 590px)/1 var(--display);
+      letter-spacing: -.12em; color: rgba(183,228,199,.035); pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 850px; }
+    .availability { display: inline-flex; align-items: center; gap: 9px; padding: 7px 11px; border: 1px solid var(--line); border-radius: 30px; color: #c0c8c3; font-size: 11px; margin-bottom: 30px; }
+    .availability i { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 12px var(--accent); }
+    h1 { margin: 0; font: 700 clamp(3.5rem, 9.3vw, 7.9rem)/.98 var(--display); letter-spacing: -.085em; }
+    h1 .soft { color: var(--accent); font-family: var(--serif); font-weight: 400; font-style: italic; letter-spacing: -.07em; }
+    .hero-copy { max-width: 510px; margin: 30px 0 34px; color: #aab3ae; font-size: clamp(15px, 1.5vw, 17px); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+    .button {
+      display: inline-flex; align-items: center; gap: 22px; padding: 14px 18px;
+      background: var(--accent); color: #101712; border: 1px solid var(--accent);
+      border-radius: 3px; font-size: 12px; font-weight: 700; transition: .25s;
+    }
+    .button:hover { transform: translateY(-3px); background: var(--accent-2); box-shadow: 0 12px 30px rgba(183,228,199,.12); }
+    .text-link { color: #d0d7d2; font-size: 12px; border-bottom: 1px solid #68746d; padding-bottom: 5px; transition: .2s; }
+    .text-link:hover { color: var(--accent); border-color: var(--accent); }
+    .hero-meta { display: flex; gap: 50px; margin-top: 90px; }
+    .meta-item small { display: block; color: #68736d; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .12em; margin-bottom: 7px; }
+    .meta-item span { color: #d0d7d2; font-size: 12px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 100px; align-items: start; }
+    .about-note { padding: 28px; border: 1px solid var(--line); background: linear-gradient(145deg, rgba(183,228,199,.07), rgba(255,255,255,.01)); min-height: 255px; position: relative; }
+    .about-note::after { content: "✳"; position: absolute; right: 24px; bottom: 10px; color: rgba(183,228,199,.3); font-size: 80px; }
+    .note-label { color: var(--accent); font: 10px var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .note-quote { max-width: 290px; margin-top: 38px; font: italic 26px/1.25 var(--serif); color: #e4eae5; }
+    .about-copy p { margin: 0 0 18px; color: #aab3ae; font-size: 15px; }
+    .about-copy p strong { color: #edf2ee; font-weight: 600; }
+    .about-facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 34px; }
+    .fact { border-top: 1px solid var(--line); padding-top: 13px; }
+    .fact small { display: block; color: #77827b; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+    .fact span { display: block; margin-top: 6px; font-size: 13px; color: #dce3de; }
+
+    /* Projects */
+    .project-list { border-top: 1px solid var(--line); }
+    .project {
+      display: grid; grid-template-columns: 64px 1fr 180px 28px; gap: 24px; align-items: center;
+      padding: 27px 10px; border-bottom: 1px solid var(--line); transition: .25s ease;
+    }
+    .project:hover { background: rgba(183,228,199,.035); padding-left: 20px; padding-right: 20px; }
+    .project-num { color: #69756e; font: 11px var(--mono); }
+    .project h3 { margin: 0 0 6px; font: 600 21px var(--display); letter-spacing: -.04em; }
+    .project p { margin: 0; color: var(--muted); font-size: 12px; max-width: 560px; }
+    .project-type { color: #9eaaa2; font: 10px var(--mono); text-transform: uppercase; letter-spacing: .08em; }
+    .project-arrow { color: var(--accent); font-size: 20px; transition: transform .2s; }
+    .project:hover .project-arrow { transform: translate(3px,-3px); }
+
+    /* Skills */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .skill-card { background: var(--bg); padding: 28px; min-height: 190px; transition: background .25s; }
+    .skill-card:hover { background: #121a16; }
+    .skill-icon { color: var(--accent); font: 22px var(--serif); }
+    .skill-card h3 { margin: 20px 0 8px; font: 600 16px var(--display); }
+    .skill-card p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+
+    /* Interests */
+    .interest-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .interest {
+      border: 1px solid var(--line); border-radius: 40px; padding: 13px 18px;
+      color: #c4cdc7; font-size: 12px; transition: .25s;
+    }
+    .interest:hover { border-color: rgba(183,228,199,.65); color: var(--accent-2); transform: translateY(-3px); background: rgba(183,228,199,.05); }
+
+    /* Contact */
+    .contact-panel {
+      padding: clamp(30px, 6vw, 70px); background: var(--accent); color: #111812;
+      display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: end;
+      position: relative; overflow: hidden;
+    }
+    .contact-panel::after { content: "↗"; position: absolute; right: 25%; top: -100px; font: 300px/1 var(--display); color: rgba(16,24,18,.045); }
+    .contact-panel .eyebrow { color: #345640; }
+    .contact-panel .eyebrow::before { background: #345640; }
+    .contact-panel h2 { max-width: 650px; font-size: clamp(2.6rem, 6vw, 5rem); }
+    .contact-panel p { max-width: 450px; color: #3d5947; font-size: 14px; margin: 20px 0 0; }
+    .contact-button { position: relative; z-index: 1; background: #101712; color: var(--accent-2); border-color: #101712; white-space: nowrap; }
+    .contact-button:hover { background: #263b2d; color: white; }
+    footer { padding: 28px 0; display: flex; justify-content: space-between; gap: 20px; color: #6e7972; font: 10px var(--mono); }
+    footer a { color: #b2bdb5; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: .12s; } .delay-2 { transition-delay: .22s; }
+
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 36px, var(--max)); }
+      nav { height: 68px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none; position: absolute; top: 68px; left: 0; right: 0; padding: 22px 24px 26px;
+        background: rgba(11,13,16,.97); border-bottom: 1px solid var(--line);
+        flex-direction: column; align-items: flex-start; gap: 20px;
+      }
+      .nav-links.open { display: flex; }
+      .hero { min-height: 730px; padding-top: 125px; }
+      .hero::after { right: -25px; top: 180px; font-size: 320px; }
+      .hero-meta { gap: 25px; flex-wrap: wrap; margin-top: 70px; }
+      .section { padding: 82px 0; }
+      .section-head { display: block; margin-bottom: 35px; }
+      .section-intro { margin-top: 18px; }
+      .about-grid { grid-template-columns: 1fr; gap: 35px; }
+      .about-note { min-height: 210px; }
+      .note-quote { margin-top: 25px; }
+      .project { grid-template-columns: 32px 1fr 22px; gap: 12px; padding: 23px 4px; }
+      .project-type { display: none; }
+      .project h3 { font-size: 18px; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .skill-card { padding: 21px; min-height: 180px; }
+      .contact-panel { grid-template-columns: 1fr; align-items: start; }
+      .contact-button { justify-self: start; }
+      footer { flex-direction: column; }
+    }
+    @media (max-width: 420px) {
+      .hero-meta { gap: 20px; }
+      .meta-item { min-width: 40%; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skill-card { min-height: 150px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav-shell" id="top">
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Rajisha home">R<span>.</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#interests">Interests</a>
+        <a class="nav-cta" href="#contact">Let's connect ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-content">
+        <div class="availability"><i></i> OPEN TO LEARNING & OPPORTUNITIES</div>
+        <div class="eyebrow">Portfolio · 2026</div>
+        <h1>Curious mind.<br><span class="soft">Analytical</span> thinking.</h1>
+        <p class="hero-copy">I'm <strong>Rajisha R</strong> — a Data Science and Mathematics student exploring the space where numbers, technology and meaningful ideas meet.</p>
+        <div class="hero-actions">
+          <a class="button" href="#projects">Explore my work <span>↘</span></a>
+          <a class="text-link" href="#contact">Get in touch</a>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item"><small>Currently</small><span>BSc · Data Science & Mathematics</span></div>
+          <div class="meta-item"><small>Based in</small><span>Bengaluru, India</span></div>
+          <div class="meta-item"><small>Approach</small><span>Learn · Explore · Build</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">01 / A little about me</div><h2>More than<br>just numbers.</h2></div>
+          <p class="section-intro">A little context about the person behind the curiosity — and the perspective I bring to every new challenge.</p>
+        </div>
+        <div class="about-grid">
+          <div class="about-note reveal">
+            <div class="note-label">A thought I keep close</div>
+            <div class="note-quote">“Stay curious. Let the questions lead.”</div>
+          </div>
+          <div class="about-copy reveal delay-1">
+            <p>I'm currently pursuing a <strong>BSc in Data Science and Mathematics at CHRIST University</strong>. I enjoy understanding how things work, finding patterns in information and turning complex ideas into something clear and useful.</p>
+            <p>Through academic work and collaborative initiatives, I've been building my foundation in analytical thinking, communication and problem-solving. I'm especially interested in using data thoughtfully to understand real-world challenges.</p>
+            <p>This portfolio is a snapshot of what I'm learning, what I'm exploring and the work I hope to build next.</p>
+            <div class="about-facts">
+              <div class="fact"><small>Education</small><span>CHRIST University</span></div>
+              <div class="fact"><small>Focus</small><span>Data · Mathematics</span></div>
+              <div class="fact"><small>Community</small><span>Student initiatives</span></div>
+              <div class="fact"><small>Mindset</small><span>Always learning</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">02 / Selected work</div><h2>Ideas into<br>action.</h2></div>
+          <p class="section-intro">A few academic and exploratory projects. Each one is an opportunity to learn by doing.</p>
+        </div>
+        <div class="project-list">
+          <a class="project reveal" href="#" aria-label="Urban Flood Alert Agent project">
+            <span class="project-num">01</span>
+            <div><h3>Urban Flood Alert Agent</h3><p>An intelligent-agent concept that explores how environmental inputs can support flood-risk awareness and timely decisions.</p></div>
+            <span class="project-type">AI · Prototype</span><span class="project-arrow">↗</span>
+          </a>
+          <a class="project reveal" href="#" aria-label="Learning Insights project">
+            <span class="project-num">02</span>
+            <div><h3>Learning Insights & Visualisation</h3><p>A service-learning exploration using structured observations and visual summaries to understand learning progress and support needs.</p></div>
+            <span class="project-type">Statistics · Social impact</span><span class="project-arrow">↗</span>
+          </a>
+          <a class="project reveal" href="#" aria-label="Add your next project">
+            <span class="project-num">03</span>
+            <div><h3>Your next project goes here</h3><p>Replace this space with a project title, a short explanation of the problem and what you contributed.</p></div>
+            <span class="project-type">Coming soon</span><span class="project-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">03 / What I'm building</div><h2>Skills &<br>foundations.</h2></div>
+          <p class="section-intro">A growing toolkit. Add proficiency levels or specific technologies as you gain hands-on experience.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card reveal"><div class="skill-icon">∑</div><h3>Mathematical thinking</h3><p>Logical reasoning, mathematical foundations and structured problem-solving.</p></article>
+          <article class="skill-card reveal delay-1"><div class="skill-icon">⌘</div><h3>Data & analysis</h3><p>Developing an understanding of data handling, interpretation and visual storytelling.</p></article>
+          <article class="skill-card reveal delay-2"><div class="skill-icon">⌁</div><h3>Programming</h3><p>Building foundational coding skills and learning to turn ideas into working solutions.</p></article>
+          <article class="skill-card reveal"><div class="skill-icon">◫</div><h3>Communication</h3><p>Explaining ideas clearly, collaborating with others and sharing progress.</p></article>
+          <article class="skill-card reveal delay-1"><div class="skill-icon">✳</div><h3>Research mindset</h3><p>Asking useful questions, observing carefully and learning from evidence.</p></article>
+          <article class="skill-card reveal delay-2"><div class="skill-icon">↗</div><h3>Teamwork</h3><p>Contributing to group work, coordinating tasks and staying open to feedback.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="interests">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div><div class="eyebrow">04 / Beyond the coursework</div><h2>Things that<br>spark curiosity.</h2></div>
+          <p class="section-intro">The topics and activities that keep me exploring beyond the classroom.</p>
+        </div>
+        <div class="interest-row reveal">
+          <span class="interest">Data storytelling</span><span class="interest">Artificial intelligence</span>
+          <span class="interest">Mathematics</span><span class="interest">Visual design</span>
+          <span class="interest">Social impact</span><span class="interest">Technology</span>
+          <span class="interest">Learning new tools</span><span class="interest">Creative problem-solving</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-panel reveal">
+          <div>
+            <div class="eyebrow">05 / Contact</div>
+            <h2>Have an idea?<br>Let's talk.</h2>
+            <p>I'm always glad to connect with people who enjoy learning, building and exchanging ideas. Feel free to reach out.</p>
+          </div>
+          <a class="button contact-button" href="mailto:your.email@example.com">Say hello <span>↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> Rajisha R. Made with curiosity.</span>
+    <span><a href="#home">Back to top ↑</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a> &nbsp;·&nbsp; <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></span>
+  </footer>
+
+  <script>
+    const navShell = document.querySelector('.nav-shell');
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      navShell.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+      menuToggle.textContent = isOpen ? 'Close' : 'Menu';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = 'Menu';
+      });
+    });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('main section[id]');
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + entry.target.id));
+        }
+      });
+    }, { rootMargin: '-35% 0px -55% 0px' });
+    sections.forEach(section => sectionObserver.observe(section));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
